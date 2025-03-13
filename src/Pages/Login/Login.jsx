@@ -33,14 +33,14 @@ const Login = () => {
             const result = await LoginApi(data).unwrap();
             console.log('Login Success:', result);
             setErrorMessage('');
-            login();
-            reset();
-            navigate('/dashboard/home');
-        } catch (err) {
+            login(); 
+            reset(); 
+            navigate('/dashboard/home'); 
+            } catch (err) {
             console.error('Login Failed:', err);
             setErrorMessage('Login failed , Please check your credentials.');
-        }
-    };
+            }
+        };
 
     return (
         <section 
@@ -78,7 +78,9 @@ const Login = () => {
                     <Button
                         type="submit"
                         className='bg-main w-full text-center text-white text-2xl font-bold rounded-2xl p-2 !mt-7'
-                        loading={isLoading} // Optional: disable button and show spinner while loading
+                        loading={isLoading}
+                        disabled ={isLoading}
+                        loaderProps={{ type: "dots" }}
                     >
                         Login
                     </Button>
