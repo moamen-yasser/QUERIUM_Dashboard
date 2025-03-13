@@ -9,7 +9,7 @@ import LoginSchema from './LoginSchema';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext/AuthProvider';
 import PasswordInput from '../../Forms/PasswordInput';
-import { useLoginMutation } from '../../Service/API';
+import { useLoginMutation } from '../../Service/Apis';
 
 const Login = () => {
     const navigate = useNavigate();
