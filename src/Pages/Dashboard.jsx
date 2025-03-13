@@ -3,7 +3,7 @@ import SharedTabs from '../Menu/SharedTabs';
 import { useNavigate, useParams } from "react-router-dom";
 import { useMediaQuery } from "@mantine/hooks";
 import Home from './Home/Home';
-import Users from './Users/Users';
+import Students from './Student/Students';
 import Upload from './Upload/Upload';
 import Logo from '../Components/Logo';
 import { TbHome } from "react-icons/tb";
@@ -32,10 +32,10 @@ const Dashboard = () => {
         },
         {
             id: 2,
-            value: "users",
-            label: "Users",
+            value: "student",
+            label: "Student",
             icon: <PiUsersThreeFill />,
-            Panel: <Users />,
+            Panel: <Students />,
         },
         {
             id: 3,
@@ -99,7 +99,9 @@ const Dashboard = () => {
                         const url =
                             value === "upload"
                             ? `/dashboard/${value}?subTabValue=single`
-                            : `/dashboard/${value}`;
+                            : value === "student"
+                            ? `/dashboard/${value}?subTabValue=all`
+                            :`/dashboard/${value}`
                         navigate(url);
                     }}
                     tabValues={tabValues}
