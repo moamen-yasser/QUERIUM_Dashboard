@@ -1,20 +1,77 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
+// import React, { lazy, Suspense } from 'react';
+// import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
+// import Loading from '../Components/Loading.jsx';
+// import ProtectedRoute from '../Components/ProtectedRoute.jsx';
+
+// // Lazy load the Dashboard component
+// const Dashboard = lazy(() => import('../Pages/Dashboard.jsx'));
+// const Questions = lazy(() => import('../Pages/Questions/Questions.jsx'));
+
+// export default function Routers() {
+//     const isAuthenticated = true; //authentication logic
+
+//     return (
+//         <Router> 
+//             <Routes>
+//                 <Route path="/" element={<Navigate to="/dashboard/home" />} />
+//                 {/* Protected Route */}
+//                 <Route
+//                     path="/dashboard/:tabValue"
+//                     element={
+//                         <Suspense fallback={<Loading />}>
+//                             <ProtectedRoute isAuthenticated={isAuthenticated}>
+//                                 <Dashboard />
+//                             </ProtectedRoute>
+//                         </Suspense>
+//                     }
+//                 />
+//                 <Route
+//                     path="/questions"
+//                     element={
+//                         <Suspense fallback={<Loading />}>
+//                             <ProtectedRoute isAuthenticated={isAuthenticated}>
+//                                 <Questions />
+//                             </ProtectedRoute>
+//                         </Suspense>
+//                     }
+//                 />
+
+//             </Routes>
+//         </Router>
+//     );
+// }
+
+
+import React, { lazy, Suspense, useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Loading from '../Components/Loading.jsx';
 import ProtectedRoute from '../Components/ProtectedRoute.jsx';
+import { AuthContext } from '../AuthContext/AuthProvider.jsx'; // Import AuthContext
 
-// Lazy load the Dashboard component
+// Lazy load the components
 const Dashboard = lazy(() => import('../Pages/Dashboard.jsx'));
 const Questions = lazy(() => import('../Pages/Questions/Questions.jsx'));
+const Login = lazy(() => import('../Pages/Login/Login.jsx'));
 
 export default function Routers() {
-    const isAuthenticated = true; //authentication logic
+    const { isAuthenticated } = useContext(AuthContext); // Use AuthContext
 
     return (
-        <Router> 
+        <Router>
             <Routes>
-                <Route path="/" element={<Navigate to="/dashboard/home" />} />
-                {/* Protected Route */}
+                {/* Redirect root URL to login page */}
+                <Route path="/" element={<Navigate to="/login" />} />
+
+                {/* Login Route */}
+                <Route
+                    path="/login"
+                    element={
+                        <Suspense fallback={<Loading />}>
+                            <Login />
+                        </Suspense>
+                    }
+                />
+
                 <Route
                     path="/dashboard/:tabValue"
                     element={
@@ -25,6 +82,7 @@ export default function Routers() {
                         </Suspense>
                     }
                 />
+
                 <Route
                     path="/questions"
                     element={
@@ -35,7 +93,6 @@ export default function Routers() {
                         </Suspense>
                     }
                 />
-
             </Routes>
         </Router>
     );

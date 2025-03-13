@@ -1,10 +1,14 @@
-import React from 'react';
-import { Button } from '@mantine/core';
+import React, { useContext } from 'react';
 import { MdLogout } from "react-icons/md";
+import { AuthContext } from '../AuthContext/AuthProvider';
 
 const Logout = () => {
+
+    const { logout } = useContext(AuthContext);
+
     const handleLogout = () => {
         console.log('User logged out');
+        logout();
     };
 
 return (

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Table } from "@mantine/core";
-import Breadcrumb from "../../Components/Breadcrumb";
 import SearchInput from "../../Components/SearchInput"; 
 
 const header= ['#', 'Name', 'Email', 'File'];
@@ -55,13 +54,8 @@ const EmptyState = ({ colSpan }) => (
 </tr>
 );
 
-// Breadcrumb items
-const breadcrumbItems = [
-{ label: "Home", link: "/dashboard/home" },
-{ label: "Users", link: "/dashboard/users" },
-];
 
-const Users = () => {
+const StudentsTable = () => {
 const [inputValue, setInputValue] = useState("");
 
 const handleInputChange = (e) => {
@@ -82,9 +76,7 @@ const filteredUsers = users.filter(
 
 return (
     <>
-    <Breadcrumb title={"All Users"} items={breadcrumbItems} />
-
-    <section className="px-12">
+    <section className="px-2">
         <div className="w-full px-6 py-3 bg-white mt-16 ">
         {/* Title */}
         <h1 className="text-2xl font-bold text-textSecondColor mb-6">
@@ -121,4 +113,4 @@ return (
 );
 };
 
-export default Users;
+export default StudentsTable;
